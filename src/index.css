@@ -1,0 +1,40 @@
+/*
+  http://bl.ocks.org/jfsiii/5380802
+  Force full width & height.
+
+  If this block is removed, the layout height/length will be determined by
+  the amount of content in the page. That might result in a page which has
+  a footer only a few inches from the top of the viewport, or one which
+  scrolls beyond the viewport.
+
+  This forces the layout to always be full screen regardless of how much,
+  or how little, content is in place. Neither is "right" or "wrong", there
+  are valid cases for each. I just want to be clear what's controlling the
+  page/viewport height.
+*/
+html,
+body,
+.viewport {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+/* encapsulate the various syntax in helper clases */
+/* inspired by http://infrequently.org/2009/08/css-3-progress/ */
+
+/* items flex/expand vertically */
+.vbox {
+  display: flex;
+  flex-direction: column;
+}
+
+/* items flex/expand horizontally */
+.hbox {
+  display: flex;
+  flex-direction: row;
+}
+
+.space-between {
+  justify-content: space-between;
+}

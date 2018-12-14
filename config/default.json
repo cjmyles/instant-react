@@ -1,0 +1,9 @@
+{
+  "app": {
+    "title": "My React App",
+    "useAuth": false
+  },
+  "api": {
+    "url": "/api/v1.0"
+  }
+}
