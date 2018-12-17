@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { decorate } from '@hbagroup/instant-react/utils/component';
-import PageHeading from '@hbagroup/instant-react/components/PageHeading';
-import app from '@hbagroup/instant-react/utils/firebase';
+import { decorate } from 'instant-react-core/utils/component';
+import PageHeading from 'instant-react-core/components/PageHeading';
+import app from 'instant-react-core/utils/firebase';
 
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';

@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { Switch } from 'react-router-dom';
-import asyncComponent from '@hbagroup/instant-react/components/AsyncComponent';
-import UnauthenticatedRoute from '@hbagroup/instant-react/components/UnauthenticatedRoute';
-import AuthenticatedRoute from '@hbagroup/instant-react/components/AuthenticatedRoute';
+import asyncComponent from 'instant-react-core/components/AsyncComponent';
+import UnauthenticatedRoute from 'instant-react-core/components/UnauthenticatedRoute';
+import AuthenticatedRoute from 'instant-react-core/components/AuthenticatedRoute';
 
 // Determine if the core routes should require authentication
 const CoreRoute = CONFIG.app.useAuth

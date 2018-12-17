@@ -1,5 +1,5 @@
 import { FirestoreRepository } from 'instant-firestore';
-import { auth, db } from '@hbagroup/instant-react/utils/firebase';
+import { auth, db } from 'instant-react-core/utils/firebase';
 
 const api = new FirestoreRepository(db, db.collection('users'));
 

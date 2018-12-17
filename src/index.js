@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from '@hbagroup/instant-react/redux/store';
+import { createStore } from 'instant-react-core/redux/store';
 import rootReducer from 'redux/modules/reducer';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';

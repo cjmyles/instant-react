@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 
 // Core
 import auth from './auth';
-import { loading, success } from '@hbagroup/instant-react/redux/reducers';
+import { loading, success } from 'instant-react-core/redux/reducers';
 
 // Custom
 import client from './client';

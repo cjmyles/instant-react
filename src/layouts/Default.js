@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { decorate } from '@hbagroup/instant-react/utils/component';
-import Layout from '@hbagroup/instant-react/layouts/Default';
+import { decorate } from 'instant-react-core/utils/component';
+import Layout from 'instant-react-core/layouts/Default';
 
 import SettingsIcon from '@material-ui/icons/Settings';
 import HelpIcon from '@material-ui/icons/HelpOutline';

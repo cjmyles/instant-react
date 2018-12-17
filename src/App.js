@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { decorate } from '@hbagroup/instant-react/utils/component';
-import LoadingPanel from '@hbagroup/instant-react/components/LoadingPanel';
+import { decorate } from 'instant-react-core/utils/component';
+import LoadingPanel from 'instant-react-core/components/LoadingPanel';
 
-import { auth } from '@hbagroup/instant-react/utils/firebase';
+import { auth } from 'instant-react-core/utils/firebase';
 import * as authActions from 'redux/modules/auth';
 import * as clientActions from 'redux/modules/client';
 

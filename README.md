@@ -1,6 +1,6 @@
 # Instant React
 
-A React boilerplate, enabling the quick development and deployment of React applications on the Firebase platform.
+React boilerplate bundled with react-router, material-ui/bootstrap and redux, enabling the quick development and deployment of applications on the Firebase platform.
 
 Initially created using [`create-react-app`](https://github.com/facebook/create-react-app) the framework has been extended to include the following features out the box:
 

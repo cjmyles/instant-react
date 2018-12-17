@@ -1,7 +1,7 @@
 {
   "name": "instant-react",
   "version": "1.0.0",
-  "description": "React boilerplate.",
+  "description": "React boilerplate bundled with react-router, material-ui/bootstrap and redux, enabling the quick development and deployment of applications on the Firebase platform.",
   "scripts": {
     "start": "cross-env NODE_ENV=development node scripts/start.js",
     "build": "node scripts/build.js",
@@ -25,7 +25,7 @@
   "author": "Craig Myles",
   "license": "MIT",
   "dependencies": {
-    "@hbagroup/instant-react": "0.0.8",
+    "instant-react-core": "^0.0.1",
     "@material-ui/core": "^3.2.2",
     "@material-ui/icons": "^3.0.1",
     "ajv": "^6.5.2",

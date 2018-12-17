@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { decorate } from '@hbagroup/instant-react/utils/component';
+import { decorate } from 'instant-react-core/utils/component';
 
-import CorePageNotFound from '@hbagroup/instant-react/components/PageNotFound';
+import CorePageNotFound from 'instant-react-core/components/PageNotFound';
 
 const styles = theme => ({
   root: {
