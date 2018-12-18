@@ -1,7 +1,7 @@
 {
   "name": "instant-react",
   "version": "1.0.0",
-  "description": "React boilerplate bundled with react-router, material-ui/bootstrap and redux, enabling the quick development and deployment of applications on the Firebase platform.",
+  "description": "React boilerplate bundled with react-router, material-ui/bootstrap and redux, enabling the rapid development and deployment of applications on the Firebase platform.",
   "scripts": {
     "start": "cross-env NODE_ENV=development node scripts/start.js",
     "build": "node scripts/build.js",
