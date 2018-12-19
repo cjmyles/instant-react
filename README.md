@@ -1,6 +1,6 @@
 # Instant React
 
-React boilerplate bundled with react-router, material-ui/bootstrap and redux, enabling the rapid development and deployment of applications on the Firebase platform.
+React boilerplate bundled with [React Router](https://github.com/ReactTraining/react-router), [Material-UI](https://material-ui.com/) (with support for [Bootstrap](https://getbootstrap.com/)), layouts, and Redux ([Redux Thunk](https://github.com/reduxjs/redux-thunk) implementing [Ducks](https://github.com/erikras/ducks-modular-redux) with optional [localstorage persistence](https://www.npmjs.com/package/redux-localstorage)). Integrates seemlessly with the [Firebase](https://firebase.google.com/) platform to enable services such as [Firebase Authentication](https://firebase.google.com/docs/auth/), [Cloud Firestore](https://firebase.google.com/docs/firestore/), [Cloud Storage](https://firebase.google.com/docs/storage/) and [Firebase Hosting](https://firebase.google.com/docs/hosting/).
 
 Initially created using [`create-react-app`](https://github.com/facebook/create-react-app) the framework has been extended to include the following features out the box:
 
