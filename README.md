@@ -198,6 +198,8 @@ With `node-config` we can define a standard set of variables or settings that ap
 
 In our case the settings that apply across _all_ environments are stored in `config/default.json`; local development settings are stored in `config/development.json`; and all production settings are stored in `config/production.json`.
 
+**Please note**: Sensitive config values should only be committed to the repository after being encrypted. As a consequence, the `development.json` and `production.json` files are excluded by git via the `.gitignore` file by default. Please see [Securing Production Config Files](https://github.com/lorenwest/node-config/wiki/Securing-Production-Config-Files) for more information.
+
 In addition to the settings you define in these files, the Firebase project settings are automatically pulled down via `firebase-tools` when the `npm start` and `npm build` commands are executed.
 
 Please see the [Modfiying Config](#modfiying-config) section for information on how to add custom settings to your application.
@@ -279,8 +281,6 @@ It's also recommended that you change the `proxy` value if you intend to make us
 Please see the [Fetch Requests](#fetch-requests) section for more information on using an external server for requests.
 
 ### Modifying Config
-
-**Please note**: Sensitive config values should only be committed to the repository after being encrypted. As a consequence, the `development.json` and `production.json` files are excluded by git via the `.gitignore` file by default. Please see [Securing Production Config Files](https://github.com/lorenwest/node-config/wiki/Securing-Production-Config-Files) for more information.
 
 Assuming your `config/default.json` file looks like this
 
