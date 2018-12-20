@@ -2,17 +2,14 @@ import React, { Fragment } from 'react';
 import { Switch } from 'react-router-dom';
 import asyncComponent from 'instant-react-core/components/AsyncComponent';
 import UnauthenticatedRoute from 'instant-react-core/components/UnauthenticatedRoute';
-import AuthenticatedRoute from 'instant-react-core/components/AuthenticatedRoute';
-
-// Determine if the core routes should require authentication
-const CoreRoute = CONFIG.app.useAuth
-  ? AuthenticatedRoute
-  : UnauthenticatedRoute;
+import CoreRoute from 'instant-react-core/components/CoreRoute';
+// import AuthenticatedRoute from 'instant-react-core/components/AuthenticatedRoute';
+// import AppliedRoute from 'instant-react-core/components/AppliedRoute';
 
 // Layouts
 const AsyncDefaultLayout = asyncComponent(() => import('layouts/Default'));
 
-// Core Components
+// Containers
 const AsyncSignIn = asyncComponent(() => import('containers/SignIn'));
 const AsyncHome = asyncComponent(() => import('containers/Home'));
 const AsyncAbout = asyncComponent(() => import('containers/About'));
@@ -20,12 +17,10 @@ const AsyncProfile = asyncComponent(() => import('containers/Profile'));
 const AsyncSettings = asyncComponent(() => import('containers/Settings'));
 const AsyncNotFound = asyncComponent(() => import('containers/PageNotFound'));
 
-// Custom Components
-// ...
-
+// Routes
 export default ({ childProps }) => (
   <Switch>
-    {/* Core Components */}
+    {/* Core Routes */}
     <CoreRoute
       path="/"
       exact
@@ -70,7 +65,7 @@ export default ({ childProps }) => (
       </Fragment>
     )}
 
-    {/* Custom Components */}
+    {/* Custom Routes */}
     {/* ... */}
 
     {/* Finally, catch all unmatched routes */}

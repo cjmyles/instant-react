@@ -1,212 +1,250 @@
 # Instant React
 
-React boilerplate bundled with [React Router](https://github.com/ReactTraining/react-router), [Material-UI](https://material-ui.com/) (with support for [Bootstrap](https://getbootstrap.com/)), layouts, and Redux ([Redux Thunk](https://github.com/reduxjs/redux-thunk) implementing [Ducks](https://github.com/erikras/ducks-modular-redux) with optional [localstorage persistence](https://www.npmjs.com/package/redux-localstorage)). Integrates seemlessly with the [Firebase](https://firebase.google.com/) platform to enable services such as [Firebase Authentication](https://firebase.google.com/docs/auth/), [Cloud Firestore](https://firebase.google.com/docs/firestore/), [Cloud Storage](https://firebase.google.com/docs/storage/) and [Firebase Hosting](https://firebase.google.com/docs/hosting/).
+React boilerplate bundled with [React Router](https://github.com/ReactTraining/react-router), [Material-UI](https://material-ui.com/), layouts, and Redux ([Redux Thunk](https://github.com/reduxjs/redux-thunk) implementing [Ducks](https://github.com/erikras/ducks-modular-redux) with optional [localstorage persistence](https://www.npmjs.com/package/redux-localstorage)). Integrates seemlessly with the [Firebase](https://firebase.google.com/) platform to enable services such as [Firebase Authentication](https://firebase.google.com/docs/auth/), [Cloud Firestore](https://firebase.google.com/docs/firestore/), [Cloud Storage](https://firebase.google.com/docs/storage/) and [Firebase Hosting](https://firebase.google.com/docs/hosting/). Part of the [`instant`](https://cjmyles.github.io/instant/) suite of rapid application development tools and can be used in conjunction with [`instant-express`](https://cjmyles.github.io/instant-express/) if an API/server solution is also required.
 
-Initially created using [`create-react-app`](https://github.com/facebook/create-react-app) the framework has been extended to include the following features out the box:
+Initially created using an _ejected_ version of [`create-react-app`](https://github.com/facebook/create-react-app), the framework has been extended to include the following features out the box:
 
+- [Config](https://www.npmjs.com/package/config)
 - [React Router](https://reacttraining.com/react-router/)
-- UI frameworks ([Material UI](https://material-ui.com) and [React-Bootstrap](https://react-bootstrap.github.io/))
-- Config, via [node-config](https://www.npmjs.com/package/config). The React app has already been 'ejected' to enable this
-- [Redux](https://redux.js.org/introduction)
+- [Material UI](https://material-ui.com/)
+- [Redux](https://redux.js.org/)
+- [Redux Thunk](https://github.com/reduxjs/redux-thunk)
+- [Redux Localstorage](https://github.com/elgerlambert/redux-localstorage)
+- [Firebase](https://firebase.google.com/) Hosting, Authentication, Cloud Firestore & Cloud Storage
 - [Code Splitting](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#code-splitting)
 - [Helmet](https://github.com/nfl/react-helmet)
-- [Firebase](https://firebase.google.com/)
 - [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/)
 - [Debugging in VSCode](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#debugging-in-the-editor)
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [UI Frameworks](#ui-frameworks)
-  - [Enabling React Bootstrap](#enabling-react-bootstrap)
-  - [Disabling Material UI](#disabling-material-ui)
-- [Config](#config)
-  - [Accessing Evironment Variables](#accessing-environment-variables)
-- [Firebase](#firebase)
-- [Folder Structure](#folder-structure)
-- [Routing & Code Splitting](#routing--code-splitting)
-- [React Helmet](#helmet)
-- [ESLint & Prettier](#eslint--prettier)
-- [Available Scripts](#available-scripts)
-  - [npm start](#npm-start)
-  - [npm test](#npm-test)
-  - [npm run build](#npm-run-build)
+- [Creating an App](#creating-an-app)
+- [Core Concepts](#core-concepts)
+  - [Config](#config)
+  - [Components & Containers](#components-containers)
+  - [Routing](#routing)
+  - [Material-UI](#material-ui)
+  - [Redux](#redux)
+  - [Firebase](#firebase)
+  - [Helmet](#helmet)
+  - [ESLint & Prettier](#eslint-prettier)
+- [Customization](#customization)
+  - [`package.json`](#packagejson)
+  - [`Modifying Config`](#modifying-config)
+  - [`Addding Components & Containers`](#adding-components-containers)
+  - [`Addding Routes`](#adding-routes)
+  - [`Themeing`](#themeing)
+  - [`Styling`](#styling)
+  - [`Layouts`](#layouts)
+  - [`Redux`](#redux)
+  - [`Using Helmet`](#using-helmet)
+- [FAQ](#faq)
 
-## Installation
+## Creating an App
 
-### Create Project
+Similar to [`create-react-app`](https://github.com/facebook/create-react-app), you can create an application using [instant-tools](https://www.npmjs.com/package/instant-tools).
 
-There are three ways to create your new React project.
+**Please note:** This will clone the [instant-react](https://github.com/cjmyles/instant-react) boilerplate into the specified `my-app` directory, and the options `-i` parameter will install all dependencies.
 
-#### Option 1 - Generator (recommended)
+### npx
 
-Install the [`instant-tools`](https://www.npmjs.com/package/@hbagroup/instant-tools) package from npm, and create a new project from the command line, much like you would with `create-react-app`:
-
-`$ npm i @hbagroup/instant-tools -g`
-
-This will install `instant-tools` globally and enable the `instant` command to be available in terminal.
-
-Create your React application and (optionally) install dependencies (by specifiying the `-i` parameter):
-
-`$ instant create react my-app-name -i`
-
-#### Option 2 - Clone Repository
-
-Clone this repository, remembering to specify a name for your new project (in this case we're calling it `my-app-name`):
-
-`$ git clone https://github.com/JSJInvestments/react-project-template.git my-app-name`
-
-Open the new directory and remove the existing `git` folder - this will ensure that we don't make changes to the React Project Template repository:
-
-```bash
-$ cd my-app-name
-$ rm -rf .git
+```sh
+$ npx instant-tools create react my-app -i
 ```
 
-**Important:** Failure to remove the existing .git directory will result in future git commands updating the core `react-project-template` repository, rather than your new repository.
+### npm
 
-#### Option 3 - Download Repository
-
-Navigate to the Github repository at https://github.com/JSJInvestments/react-project-template. Click the green `Clone or download` button and click `Download ZIP`.
-
-Extract the zip at the desired location into the directory `my-app-name`.
-
-### Setup Project
-
-#### Change Working Directory
-
-Ensure you're in the root of the project directory:
-
-`$ cd my-app-name`
-
-#### Install Dependencies
-
-Download dependencies to the `node_modules` folder if you haven't already (remember the generator can do this for us):
-
-`$ npm i`
-
-#### Initialise Git
-
-`$ git init`
-
-#### Initialise Firebase
-
-`$ firebase use --add`
-
-The `firebase use` command will provide you with a list of available Firebase projects with which to associate your codebase with (this assumes you've created a Firebase project to assign to your application and you've logged into Firebase using the cli tool `firebase-tools`):
-
-#### `package.json`
-
-Modify the `package.json` file to customise the `name` and `description` fields for your project (and add a `version` field if necessary - [Semantic Versioning](https://semver.org/) is strongly recommended).
-
-### Run the Application
-
-Start the application.
-
-`$ npm start`
-
-Navigate to `http://localhost:3000/` to see your new application up and running (or wait for React to open a browser window automatically).
-
-## UI Frameworks
-
-React Project Template comes with support for
-[React-Bootstrap](https://react-bootstrap.github.io/) and
-[Material UI](https://material-ui.com). Depending on your project you may choose
-to use one, both or neither of these frameworks.
-
-Material UI is enabled by default and it's the recommended framework for any new
-projects. However, if you would like to enable React Bootstrap please follow the
-instructions below. You may also choose to disable Material UI.
-
-**Please note**: enabling both frameworks may cause collisions or styling
-issues.
-
-### Enabling React Bootstrap
-
-**Please note**: React-Bootstrap currently targets Bootstrap v3, and not the
-latest version of Bootstrap, v4.
-
-Enable the Bootstrap css in `public/index.html`.
-
-```html
-<link
-  rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-  crossorigin="anonymous"
-/>
+```sh
+$ npm i instant-tools -g
+$ instant create react my-app -i
 ```
 
-### Disabling Material UI
+**Please note:** This will install the [instant-tools](https://www.npmjs.com/package/instant-tools) CLI globally, which will come in useful later on for generating new project files such as components and Redux modules.
 
-Material UI utilises the
-[Google Roboto](https://fonts.google.com/specimen/Roboto) font and
-[Material Font Icons](https://material.io/tools/icons/). These are referenced in
-`public/index.html`, and should be removed (or commented out, but then they'd
-still be visible when viewing the page source which can be untidy).
+It will create a directory called `my-app` inside the current folder. Inside that directory, it will generate the initial project structure and install the transitive dependencies:
 
-```html
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
-/>
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/icon?family=Material+Icons"
-/>
+```
+my-app
+├── LICENCE
+├── README.md
+├── node_modules
+├── package.json
+├── database.json
+├── firebase.json
+├── firestore.indexes.json
+├── firestore.rules
+├── .env
+├── .eslintrc
+├── .gitignore
+├── .prettierrc
+├── config
+│   ├── default.json
+│   ├── development.json
+│   ├── env.js
+│   ├── paths.js
+│   ├── polyfills.js
+│   ├── production.json
+│   ├── webpack.config.dev.js
+│   ├── webpack.config.prod.js
+│   └── webpackDevServer.config.js
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   └── manifest.json
+├── scripts
+│   ├── build.js
+│   ├── firebase.js
+│   └── start.js
+│   └── test.js
+└── src
+    ├── App.js
+    ├── App.test.js
+    ├── index.css
+    ├── index.js
+    ├── registerServiceWorker.js
+    ├── Routes.js
+    ├── Theme.js
+    ├── config
+        └── theme.js
+    ├── containers
+        ├── About.js
+        ├── Home.js
+        ├── PageNotFound.js
+        ├── Profile.js
+        ├── Settings.js
+        └── SignIn.js
+    ├── layouts
+        └── Default.js
+    └── redux
+        └── modules
+            ├── auth.js
+            ├── client.js
+            └── reducer.js
 ```
 
-You may also choose to remove the Material UI and Material Icons npm packages in
-`package.json`.
+Just like `create-react-app`, `instant-react` assumes the following.
 
-```json
-"@material-ui/core": "^1.4.0",
-"@material-ui/icons": "^1.1.0",
+> For the project to build, **these files must exist with exact filenames**:
+>
+> - `public/index.html` is the page template;
+> - `src/index.js` is the JavaScript entry point.
+>
+> You can delete or rename the other files.
+>
+> You may create subdirectories inside `src`. For faster rebuilds, only files inside `src` are processed by Webpack.<br>
+> You need to **put any JS and CSS files inside `src`**, otherwise Webpack won’t see them.
+>
+> Only files inside `public` can be used from `public/index.html`.<br>
+> Read instructions below for using assets from JavaScript and HTML.
+>
+> You can, however, create more top-level directories.<br>
+> They will not be included in the production build so you can use them for things like documentation.
+
+Once the installation is done, you can open your project folder:
+
+```sh
+cd my-app
 ```
 
-Remove references to `CssBaseline` from `App.js` - this component acts like `Normalize`, ensuring the app's CSS has a consistent canvas to start from.
+Inside the newly created project, you can run some built-in commands:
 
-```js
-import CssBaseline from '@material-ui/core/CssBaseline';
-...
-<CssBaseline />;
-...
-```
+### `firebase use --add`
 
-Remove any Material UI references in the `containers` and `components` folders.
+Associates the project with a Firebase project. You will be provided with a list of Firebase projects to choose from.
 
-## Config
+**Please note:** This assumes you have created a Firebase project for this purpose and you've logged into Firebase using the cli tool `firebase-tools`.
 
-React Project Template relies on [node-config](https://github.com/lorenwest/node-config), as this negates the need for managing environment variables in different ways depending on the underlying environment. For example, Firebase requires environment variables to be set manually using the Firebase CLI, and Heroku requires environment variables to be set from the project dashboard, whereas locally we might want to use Docker or Terminal to set the variables at run time.
+**Please note:** This is currently a pre-requisite and the application won't load without an associated Firebase project. However, this dependency will be removed in the near future.
 
-With node-config we can define a standard set of variables or settings that apply across _all_ environments in a `config/default.json` or `config/default.js` file and then override these for each envioronment by defining a `config/test.json` or `config/production.json` file for example.
+### `npm start`
 
-**Please note**: Sensitive config values should only be committed to the repository after being encrypted. Please see https://github.com/lorenwest/node-config/wiki/Securing-Production-Config-Files for more information.
+Runs the app in development mode. Open http://localhost:3000 to view it in the browser.
 
-### Accessing Environment Variables
+The page will automatically reload if you make changes to the code. You will see the build errors and lint warnings in the console.
 
-Right now `node-config` doesn't work with `Webpack` out of the box because it reads the config files at runtime, which can't be done when the code is running on a browser. Therefore, the `Webpack` config file has been amended to enable config values to be read at runtime (see https://github.com/lorenwest/node-config/wiki/Webpack-Usage#option-2 for more information).
+<p align='center'>
+<img src='https://cdn.rawgit.com/marionebl/create-react-app/9f62826/screencast-error.svg' width='600' alt='Build errors'>
+</p>
 
-**Please note:** We opted for Option 2 over Option 4 (even though 4 enabled the config `get()` method) as Option 4 causes warnings to be displayed. It may be worth reassessing this in future versions of `node-config`, `Webpack` and `react-scripts`.
+### `npm test`
 
-Assuming your `config/default.json` file looks like this
+Runs the test watcher in an interactive mode. By default, runs tests related to files changed since the last commit.
 
-```json
-{
-  "testing": 123
-}
-```
+[Read more about testing.](https://facebook.github.io/create-react-app/docs/running-tests)
 
-It would be possible to access this value from within your React code as follows
+### `npm run build`
 
-```js
-import config from 'config';
-console.log(CONFIG.testing);
-```
+Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance.
 
-**Please note**: If you add new configuration values to these files and you're running Webpack Dev Server (by virtue of running `npm start`, then you'll need to restart the server in order to view these settings in your application).
+The build is minified and the filenames include the hashes.
 
-**Please note**: The `CONFIG` object has been added to the `globals` option of `.eslintrc` to hide warnings regarding the non-declaration of this variable.
+Your app is ready to be deployed.
+
+### `firebase deploy`
+
+Deploys the `build` folder to the associated Firebase project, via Firebase Hosting. Once deployed you'll see the deployed URL in the console.
+
+### `npm run deploy`
+
+Builds the app for production and deploys the `build` folder to the associated Firebase project. A combination of the `npm run build` and `firebase deploy` commands.
+
+## Core Concepts
+
+### Config
+
+`instant-react` (and in fact most of the [`instant`](https://cjmyles.github.io/instant/) suite) relies heavily on [node-config](https://github.com/lorenwest/node-config). Although the default _ejected_ application generated by `create-react-app` utilizes `.env` files (you can see how to implement them in this [helpful article](https://medium.com/@trekinbami/using-environment-variables-in-react-6b0a99d83cf5)), `instant-react` utilizes `node-config` as it can be used for both client and server-side applications with only slightly varying usage. This ensures consistent behaviour across all the `instant` tools.
+
+With `node-config` we can define a standard set of variables or settings that apply across _all_ environments, and then define a specific set of environment variables than be used to override the defaults.
+
+In our case the settings that apply across _all_ environments are stored in `config/default.json`; local development settings are stored in `config/development.json`; and all production settings are stored in `config/production.json`.
+
+In addition to the settings you define in these files, the Firebase project settings are automatically pulled down via `firebase-tools` when the `npm start` and `npm build` commands are executed.
+
+Please see the [Modfiying Config](#modfiying-config) section for information on how to add custom settings to your application.
+
+### Components & Containers
+
+Although not enforced, `instant-react` adheres to the concept that all reusable React components are stored in `src/components`. This could include atomic elements such as buttons, alerts or progress bars. Components which map to URL routes are stored in `src/containers` and should only be referenced once by your application, in the `src/Routes.js` file (please see [Routing](#routing) for more information). This could include the Homepage, the About page, the Sign-in page and so on. Although similar to components in technical design, containers allow us to separate application pages from the atomic components they utilize.
+
+See the [Components & Containers](#omponents-containers) section for information on how to add new components and containers to your applicaton.
+
+### Routing
+
+The `src/Routes.js` file contains the URL routing configuration and implements [React Router](https://reacttraining.com/react-router/) and [Code Splitting](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#code-splitting).
+
+Routes are split into three different types:
+
+- Authenticated: Access is only granted if the user is _authenticated_, e.g user profile page.
+- Unathenticated: Access is only granted if the user is _unauthenticated_, e.g pricing page.
+- Applied: Access is granted whether the user is _authenticated_ or _unauthenticated_, e.g. homepage.
+
+Attempted access to an authenticated route by a user that isn't authenticated will result in the user being redirected to `/signin` and the attempted page URL will be appended as a `redirect` url parameter (once successfully signed in, the user will be redirected to that page).
+
+You'll notice another, special, type of route too:
+
+- Core: If authentication has been enabled then this will act as an Authenticated route. If authentication has been disabled then this will act as an Unauthenticated route. This can be useful if you want hide or show all routes in one go without having to alter the `Routes.js` file. Authentication can be enabled or disabled by toggling the `app.useAuth` setting in `config`.
+
+Your application can implement any of these routes.
+
+Containers are imported asyncronously so that they are only loaded into memory when the revelant URL route is triggered. This prevents all of our containers being loaded at once unecessarily.
+
+A default 'catch all' route is also specified which displays the `PageNotFound` container.
+
+See the [Routes](#routes) section for information on how to add new routes to your applicaton.
+
+### [Material UI](https://material-ui.com)
+
+Material UI is enabled by default and is utilized by the core components and containers. On top of this, `instant-react` provides template theming, styling guidelines and layouts.
+
+Material UI utilises the [Google Roboto](https://fonts.google.com/specimen/Roboto) font and [Material Font Icons](https://material.io/tools/icons/) which are referenced in `public/index.html`.
+
+See the [Themeing](#themeing), [Styling](#styling) and [Layouts](#layouts) sections for information on how to customize the look and feel of your application.
+
+### Redux
+
+`instant-react` has been configured to utilise [Redux](https://github.com/reduxjs/redux), [Redux Thunk](https://github.com/reduxjs/redux-thunk) and [Redux Localstorage](https://www.npmjs.com/package/redux-localstorage). We've opted to use the [Ducks Modular Redux](https://github.com/erikras/ducks-modular-redux) pattern for Redux modules.
+
+Redux is useful for large applications and can be integrated into your application with very little effort. Please see the [Using Redux](#using-redux) section for information on how to use Redux in your application.
 
 ## Firebase
 
@@ -241,122 +279,11 @@ You can find these values in the Firebase console. React Project Template will o
 import firebase, { auth, storage, firestore } from './firebase';
 ```
 
-### Serve
-
-In order to serve from the build folder run `npm run serve`. The default username has been set up as follows:
-
-| Username                    | Password   |
-| --------------------------- | ---------- |
-| test@instantfeedback.com.au | DauGHTIREa |
-
-### Deployment
-
-In order to deploy to Firebase run `npm run deploy`. This will ensure the application is built for production and then deployed to Firebase.
-
-**Please note:** If you run `firebase deploy` it will deploy the `build` folder. Please either run `npm run deploy` to ensure the latest code is used to create the `build` folder, or run `npm run build` before `firebase deploy`.
-
-## Folder Structure
-
-After creation, your project should look like this:
-
-```
-my-app/
-  build/
-  config/
-  firebase/
-  images/
-  node_modules/
-  public/
-    index.html
-    favicon.ico
-    manifest.json
-  scripts/
-    build.js
-    start.js
-    test.js
-  src/
-    components/
-    containers/
-    App.js
-    App.test.js
-    index.css
-    index.js
-    registerServiceWorker.js
-    Routes.js
-  .gitignore
-  package.json
-  README.md
-```
-
-For the project to build, **these files must exist with exact filenames**:
-
-- `public/index.html` is the page template;
-- `src/index.js` is the JavaScript entry point.
-
-You can delete or rename the other files.
-
-You may create subdirectories inside `src`. For faster rebuilds, only files inside `src` are processed by Webpack.<br>
-You need to **put any JS and CSS files inside `src`**, otherwise Webpack won’t see them.
-
-Only files inside `public` can be used from `public/index.html`.<br>
-Read instructions below for using assets from JavaScript and HTML.
-
-You can, however, create more top-level directories.<br>
-They will not be included in the production build so you can use them for things like documentation.
-
-The `src/containers` directory contains React components that should be used as the entry point for routes (please see [Routing](#routing) below. These are not intended to be referenced in the application more than once. The following containers come out the box with React Project Template and should be customised for your own needs.
-
-The `src/components` directory contains low level React components that are intended to be refenced by containers, perhaps even multiple times throughout your application, such as buttons and menus.
-
-## Routing & Code Splitting
-
-React Project Template has been configured to utilise [React Router](https://reacttraining.com/react-router) and [Code Splitting](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#code-splitting). The `Routes.js` file contains code to asynchronously load React components (that we store in the `containers` directory) depending on the matched route path.
-
-For example the `Home` container is loaded using the `asyncComponent()` helper and the `AppliedRoute` component.
-
-```js
-const AsyncHome = asyncComponent(() => import('./containers/Home'));
-<AppliedRoute path="/" exact component={AsyncHome} props={childProps} />;
-```
-
-Although you can choose not to implement components using asynchronous loading, Code Splitting is recommended in order to only load the components required, when they are required.
-
-There are three types of `Route` components.
-
-### AppliedRoute
-
-This component should be used for containers that can be visible to both authenticated and unauthenticated users, for example a homepage.
-
-### AuthenticatedRoute
-
-This component should be used for containers that need to exist behind the authentication wall, for example a user profile or billing page. Navigation to a route that utilises this component will redirect the user to `/signin` and the attempted page URL will be appended as a `redirect` url parameter (once successfully signed in, the user will be redirected to that page).
-
-### UnauthenticatedRoute
-
-This component should be used for containers that exist outside of the authentication wall, for example a signup or pricing page.
-
 ## Helmet
 
-[React Helmet](https://github.com/nfl/react-helmet) enables us to modify page headers at runtime, for example the page title or meta data. To use Helmet, simply import the library and wrap your HTML in a `<Hemlmet>` tag.
+[React Helmet](https://github.com/nfl/react-helmet) enables us to modify page headers at runtime, for example the title or meta data attributes.
 
-```js
-import React from 'react';
-import { Helmet } from 'react-helmet';
-
-class Home extends React.Component {
-  render() {
-    return (
-      <div>
-        <Helmet>
-          <title>Home</title>
-          <link rel="canonical" href="http://mysite.com/example" />
-        </Helmet>
-        ...
-      </div>
-    );
-  }
-}
-```
+See [Using Helmet](#using-helmet) for more information on how to customize page headers at runtime.
 
 ## ESLint & Prettier
 
@@ -368,31 +295,94 @@ ESLint[ESLint](https://eslint.org/) & [Prettier](https://prettier.io/) have been
 
 Prettier is also configured to run as a precommit hook so that any staged files are automatically updated before commit.
 
-For more information please see https://medium.com/technical-credit/using-prettier-with-vs-code-and-create-react-app-67c2449b9d08.
+For more information please see [this useful article](https://medium.com/technical-credit/using-prettier-with-vs-code-and-create-react-app-67c2449b9d08).
 
-## Available Scripts
+## Customization
 
-In the project directory, you can run:
+### `package.json`
 
-### `npm start`
+It's recommended that you modify the `package.json` file to customise the `name` and `description` fields for your project (and add a `version` field if necessary - [Semantic Versioning](https://semver.org/) is strongly recommended). This information is accessed by the application and displayed in the `About` page by default (via the `/about` URL route).
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Modifying Config
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+**Please note**: Sensitive config values should only be committed to the repository after being encrypted. As a consequence, the `development.json` and `production.json` files are excluded by git via the `.gitignore` file by default. Please see [Securing Production Config Files](https://github.com/lorenwest/node-config/wiki/Securing-Production-Config-Files) for more information.
 
-### `npm test`
+Assuming your `config/default.json` file looks like this
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](#running-tests) for more information.
+```json
+{
+  "testing": 123
+}
+```
 
-### `npm run build`
+It would be possible to access this value from within your React code as follows.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```js
+import config from 'config';
+console.log(CONFIG.testing);
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+**Please note**: If you add new configuration values to these files and you're running Webpack Dev Server (by virtue of running `npm start`, then you'll need to restart the server in order to view these settings in your application).
 
-See the section about [deployment](#deployment) for more information.
+**Please note**: The `CONFIG` object has been added to the `globals` option of `.eslintrc` to hide warnings regarding the non-declaration of this variable.
+
+Please see the [`node-config`](https://github.com/lorenwest/node-config) documentation for more information.
+
+### Addding Components & Containers
+
+### Adding Routes
+
+### Themeing
+
+### Styling
+
+### Layouts
+
+### Using Redux
+
+### Using Helmet
+
+To use Helmet, simply import the library and wrap your page headers in a `<Helmet>` tag.
+
+```js
+import React, { Fragment } from 'react';
+import { Helmet } from 'react-helmet';
+
+function() {
+  return (
+    <Fragment>
+      <Helmet>
+        <title>Home</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
+      <div>
+        Your content
+      </div>
+    </Fragment>
+  );
+}
+```
+
+## FAQ
+
+### How does `node-config` know which environment file to use?
+
+The `process.env.NODE_ENV` variable is set to `development` in `package.json` when the `npm start` command is executed, and Firebase automatically sets the `process.env.NODE_ENV` variable to `production` in hosting. The
+
+### How does `node-config` work with Webpack?
+
+`node-config` doesn't work with `Webpack` out of the box because it reads the config files at runtime, which can't be done when the code is running on a browser. Therefore, the `Webpack` config file has been amended to enable config values to be read at runtime (see https://github.com/lorenwest/node-config/wiki/Webpack-Usage#option-2 for more information).
+
+**Please note:** We opted for Option 2 over Option 4 (even though 4 enabled the config `get()` method) as Option 4 causes warnings to be displayed. It may be worth reassessing this in future versions of `node-config`, `Webpack` and `react-scripts`.
+
+## Contributing
+
+We'd greatly appreciate any [contribution](CONTRIBUTING.md) you make.
+
+## License
+
+[MIT](LICENSE)
+
+- [Routing & Code Splitting](#routing--code-splitting)
+- [React Helmet](#helmet)
+- [ESLint & Prettier](#eslint--prettier)
