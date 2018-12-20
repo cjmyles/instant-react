@@ -30,21 +30,21 @@ Initially created using an _ejected_ version of [`create-react-app`](https://git
   - [ESLint & Prettier](#eslint-prettier)
 - [Customization](#customization)
   - [`package.json`](#packagejson)
-  - [`Modifying Config`](#modifying-config)
-  - [`Addding Components & Containers`](#adding-components-containers)
-  - [`Addding Routes`](#adding-routes)
-  - [`Themeing`](#themeing)
-  - [`Styling`](#styling)
-  - [`Layouts`](#layouts)
-  - [`Redux`](#redux)
-  - [`Using Helmet`](#using-helmet)
+  - [Modifying Config](#modifying-config)
+  - [Addding Components & Containers](#adding-components-containers)
+  - [Addding Routes](#adding-routes)
+  - [Themeing](#themeing)
+  - [Styling](#styling)
+  - [Layouts](#layouts)
+  - [Redux](#redux)
+  - [Using Helmet](#using-helmet)
 - [FAQ](#faq)
 
 ## Creating an App
 
 Similar to [`create-react-app`](https://github.com/facebook/create-react-app), you can create an application using [instant-tools](https://www.npmjs.com/package/instant-tools).
 
-**Please note:** This will clone the [instant-react](https://github.com/cjmyles/instant-react) boilerplate into the specified `my-app` directory, and the options `-i` parameter will install all dependencies.
+**Please note:** This will clone the [instant-react](https://github.com/cjmyles/instant-react) boilerplate into the specified `my-app` directory, and the optional `-i` parameter will install all dependencies.
 
 ### npx
 
@@ -152,13 +152,13 @@ Inside the newly created project, you can run some built-in commands:
 
 Associates the project with a Firebase project. You will be provided with a list of Firebase projects to choose from.
 
-**Please note:** This assumes you have created a Firebase project for this purpose and you've logged into Firebase using the cli tool `firebase-tools`.
+**Please note:** This assumes you have created a Firebase project for this purpose and you've logged into Firebase using the [`firebase-tools`](https://firebase.google.com/docs/cli/) CLI.
 
-**Please note:** This is currently a pre-requisite and the application won't load without an associated Firebase project. However, this dependency will be removed in the near future.
+**Please note:** This is currently a pre-requisite and the application won't load without an associated Firebase project. However, this dependency may be removed in the future.
 
 ### `npm start`
 
-Runs the app in development mode. Open http://localhost:3000 to view it in the browser.
+Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will automatically reload if you make changes to the code. You will see the build errors and lint warnings in the console.
 
@@ -248,36 +248,7 @@ Redux is useful for large applications and can be integrated into your applicati
 
 ## Firebase
 
-Firebase is enabled by default and it's recommended for any new projects. Firebase has a host of constantly expanding features including, but not limited to:
-
-- Authentication
-- Storage
-- Database
-- Static web hosting (e.g React apps)
-- Dynamic web hosting (e.g Node apps)
-
-It's easy to set up, does a lot of the hard work for us (e.g. user management), and provides mechanisms and rules to restrict access to databases and storage. It's also scalable.
-
-### Configuration
-
-React Project Template assumes that you have the following configuration settings (please see [config](#config)).
-
-```json
-  "firebase": {
-    "projectId": "your project id",
-    "apiKey": "your api key",
-    "authDomain": "your-project-id.firebaseapp.com",
-    "databaseURL": "https://your-project-id.firebaseio.com",
-    "storageBucket": "your-project-id.appspot.com",
-    "messagingSenderId": "your message sender id"
-  }
-```
-
-You can find these values in the Firebase console. React Project Template will only set up the services you need, depending on your configuration file. For example, if you provide an `authDomian` the Firebase authorisation module will be initialised. In order to use Firebase in your application simply import the modules that you need from `/firebase`.
-
-```js
-import firebase, { auth, storage, firestore } from './firebase';
-```
+@todo
 
 ## Helmet
 
@@ -332,13 +303,23 @@ Please see the [`node-config`](https://github.com/lorenwest/node-config) documen
 
 ### Adding Routes
 
+@todo
+
 ### Themeing
+
+@todo
 
 ### Styling
 
+@todo
+
 ### Layouts
 
+@todo
+
 ### Using Redux
+
+@todo
 
 ### Using Helmet
 
