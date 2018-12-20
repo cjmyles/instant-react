@@ -274,6 +274,10 @@ For more information please see [this useful article](https://medium.com/technic
 
 It's recommended that you modify the `package.json` file to customise the `name` and `description` fields for your project (and add a `version` field if necessary - [Semantic Versioning](https://semver.org/) is strongly recommended). This information is accessed by the application and displayed in the `About` page by default (via the `/about` URL route).
 
+It's also recommended that you change the `proxy` value if you intend to make use of server requests in development mode.
+
+Please see the [Fetch Requests](#fetch-requests) section for more information on using an external server for requests.
+
 ### Modifying Config
 
 **Please note**: Sensitive config values should only be committed to the repository after being encrypted. As a consequence, the `development.json` and `production.json` files are excluded by git via the `.gitignore` file by default. Please see [Securing Production Config Files](https://github.com/lorenwest/node-config/wiki/Securing-Production-Config-Files) for more information.
@@ -298,6 +302,81 @@ console.log(CONFIG.testing);
 **Please note**: The `CONFIG` object has been added to the `globals` option of `.eslintrc` to hide warnings regarding the non-declaration of this variable.
 
 Please see the [`node-config`](https://github.com/lorenwest/node-config) documentation for more information.
+
+### Fetch Requests
+
+As with any React application, you can make use of the [`Fetch API`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to fetch resources, such as requesting data from an API.
+
+To serve data from an API using the same host as the React application, you can add the server URL to `package.json`, so that requests like `fetch('/api/todos`) will be proxied to the server.
+
+`package.json`
+
+```json
+"proxy": "http://localhost:5001/[node-project-id]/us-central1/app/"
+```
+
+Please see the [create-react-app docs](https://facebook.github.io/create-react-app/docs/proxying-api-requests-in-development) for more information.
+
+To ease the process of making server requests, `instant-react` is bundled with a request helper that utilizes the [`instant-request`](https://www.npmjs.com/package/instant-request) package. For this to work you'll need to modify your config to include the URI prefix that all requests will use (by default this is just "/api").
+
+`default.json`
+
+```json
+"api": {
+  "url": "/api"
+}
+```
+
+Now you can import the `request` helper into your code from `instant-react-core`, and create a new instance of the class.
+
+```js
+import Request from 'instant-react-core/lib/utils/request';
+const request = new Request();
+```
+
+It's now possible to make POST, GET, PUT and DELETE requests by using your new request instance.
+
+```js
+const createTodo = async () => {
+  try {
+    const todo = await request.post('/todos', {
+      id: '1',
+      description: 'Book holiday',
+    });
+    return todo;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getTodos = async () => {
+  try {
+    const todos = await request.get('/todos');
+    return todos;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateTodo = async () => {
+  try {
+    const todo = await request.put('/todos/1', { completed: true });
+    return todo;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteTodo = async () => {
+  try {
+    await request.delete('/todos/1');
+  } catch (error) {
+    throw error;
+  }
+};
+```
+
+This type of code can be utilized in your Redux modules. Please see the [Using Redux](#using-redux) section for information on how to use Redux in your application.
 
 ### Addding Components & Containers
 
