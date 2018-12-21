@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Switch } from 'react-router-dom';
 import asyncComponent from 'instant-react-core/components/AsyncComponent';
+// import AuthenticatedRoute from 'instant-react-core/components/AuthenticatedRoute';
 import UnauthenticatedRoute from 'instant-react-core/components/UnauthenticatedRoute';
 import CoreRoute from 'instant-react-core/components/CoreRoute';
-// import AuthenticatedRoute from 'instant-react-core/components/AuthenticatedRoute';
-// import AppliedRoute from 'instant-react-core/components/AppliedRoute';
+import AppliedRoute from 'instant-react-core/components/AppliedRoute';
 
 // Layouts
 const AsyncDefaultLayout = asyncComponent(() => import('layouts/Default'));
@@ -20,6 +20,24 @@ const AsyncNotFound = asyncComponent(() => import('containers/PageNotFound'));
 // Routes
 export default ({ childProps }) => (
   <Switch>
+    {/* Applied Routes */}
+    <AppliedRoute
+      path="/about"
+      exact
+      component={AsyncAbout}
+      layout={AsyncDefaultLayout}
+      props={childProps}
+    />
+
+    {/* UnauthenticatedRoutes */}
+    <UnauthenticatedRoute
+      path="/signin"
+      exact
+      component={AsyncSignIn}
+      props={childProps}
+      layout={AsyncDefaultLayout}
+    />
+
     {/* Core Routes */}
     <CoreRoute
       path="/"
@@ -30,40 +48,20 @@ export default ({ childProps }) => (
     />
 
     <CoreRoute
-      path="/about"
+      path="/profile"
       exact
-      component={AsyncAbout}
+      component={AsyncProfile}
       layout={AsyncDefaultLayout}
       props={childProps}
     />
 
-    {CONFIG.app.useAuth && (
-      <Fragment>
-        <UnauthenticatedRoute
-          path="/signin"
-          exact
-          component={AsyncSignIn}
-          props={childProps}
-          layout={AsyncDefaultLayout}
-        />
-
-        <CoreRoute
-          path="/profile"
-          exact
-          component={AsyncProfile}
-          layout={AsyncDefaultLayout}
-          props={childProps}
-        />
-
-        <CoreRoute
-          path="/settings"
-          exact
-          component={AsyncSettings}
-          layout={AsyncDefaultLayout}
-          props={childProps}
-        />
-      </Fragment>
-    )}
+    <CoreRoute
+      path="/settings"
+      exact
+      component={AsyncSettings}
+      layout={AsyncDefaultLayout}
+      props={childProps}
+    />
 
     {/* Custom Routes */}
     {/* ... */}

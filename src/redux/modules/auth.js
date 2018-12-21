@@ -31,7 +31,7 @@ export default function reducer(state = initialState, action = {}) {
  */
 export const authStateChanged = authUser => async dispatch => {
   try {
-    let user = {};
+    let user = null;
     if (authUser) {
       user = Object.assign(
         {},

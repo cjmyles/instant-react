@@ -200,7 +200,7 @@ In our case the settings that apply across _all_ environments are stored in `con
 
 **Please note**: Sensitive config values should only be committed to the repository after being encrypted. As a consequence, the `development.json` and `production.json` files are excluded by git via the `.gitignore` file by default. Please see [Securing Production Config Files](https://github.com/lorenwest/node-config/wiki/Securing-Production-Config-Files) for more information.
 
-In addition to the settings you define in these files, the Firebase project settings are automatically pulled down via `firebase-tools` when the `npm start` and `npm build` commands are executed.
+In addition to the settings you define in these files, the [Firebase project settings](https://firebase.google.com/docs/web/setup) are automatically pulled down via `firebase-tools` when the `npm start` and `npm build` commands are executed, and added to the application's config object.
 
 Please see the [Modfiying Config](#modfiying-config) section for information on how to add custom settings to your application.
 
@@ -208,7 +208,7 @@ Please see the [Modfiying Config](#modfiying-config) section for information on 
 
 Although not enforced, `instant-react` adheres to the concept that all reusable React components are stored in `src/components`. This could include atomic elements such as buttons, alerts or progress bars. Components which map to URL routes are stored in `src/containers` and should only be referenced once by your application, in the `src/Routes.js` file (please see [Routing](#routing) for more information). This could include the Homepage, the About page, the Sign-in page and so on. Although similar to components in technical design, containers allow us to separate application pages from the atomic components they utilize.
 
-See the [Components & Containers](#omponents-containers) section for information on how to add new components and containers to your applicaton.
+See the [Adding Components & Containers](#adding-components-containers) section for information on how to add new components and containers to your applicaton.
 
 ### Routing
 
@@ -216,19 +216,19 @@ The `src/Routes.js` file contains the URL routing configuration and implements [
 
 Routes are split into three different types:
 
-- Authenticated: Access is only granted if the user is _authenticated_, e.g user profile page.
-- Unathenticated: Access is only granted if the user is _unauthenticated_, e.g pricing page.
-- Applied: Access is granted whether the user is _authenticated_ or _unauthenticated_, e.g. homepage.
+- `Authenticated`: Access is only granted if the user is _authenticated_, e.g Profile page.
+- `Unathenticated`: Access is only granted if the user is _unauthenticated_, e.g About page.
+- `Applied`: Access is granted whether the user is _authenticated_ or _unauthenticated_, e.g. Homepage.
 
-Attempted access to an authenticated route by a user that isn't authenticated will result in the user being redirected to `/signin` and the attempted page URL will be appended as a `redirect` url parameter (once successfully signed in, the user will be redirected to that page).
+Attempted access to an `Authenticated` route by a user that isn't authenticated will result in the user being redirected to `/signin` and the attempted page URL will be appended as a `redirect` URL parameter (once successfully signed in, the user will be redirected to that page), e.g `http://localhost:3000/signin?redirect=profile`.
 
 You'll notice another, special, type of route too:
 
-- Core: If authentication has been enabled then this will act as an Authenticated route. If authentication has been disabled then this will act as an Unauthenticated route. This can be useful if you want hide or show all routes in one go without having to alter the `Routes.js` file. Authentication can be enabled or disabled by toggling the `app.useAuth` setting in `config`.
+- `Core`: If authentication has been enabled then this will act as an `Authenticated` route. If authentication has been disabled then this will act as an `Unauthenticated` route. This can be useful if you want hide or show all routes in one go without having to alter the `Routes.js` file. Authentication can be enabled or disabled by toggling the `app.useAuth` setting in `config`.
 
 Your application can implement any of these routes.
 
-Containers are imported asyncronously so that they are only loaded into memory when the revelant URL route is triggered. This prevents all of our containers being loaded at once unecessarily.
+Containers are imported _asyncronously_ so that they are only loaded into memory when the revelant URL route is triggered. This prevents all of our containers being loaded at once unecessarily.
 
 A default 'catch all' route is also specified which displays the `PageNotFound` container.
 
@@ -236,7 +236,7 @@ See the [Routes](#routes) section for information on how to add new routes to yo
 
 ### [Material UI](https://material-ui.com)
 
-Material UI is enabled by default and is utilized by the core components and containers. On top of this, `instant-react` provides template theming, styling guidelines and layouts.
+Material UI is enabled by default and is utilized by the core `instant-react` components and containers. In addition, `instant-react` provides template theming, styling properties and layouts.
 
 Material UI utilises the [Google Roboto](https://fonts.google.com/specimen/Roboto) font and [Material Font Icons](https://material.io/tools/icons/) which are referenced in `public/index.html`.
 
@@ -244,13 +244,23 @@ See the [Themeing](#themeing), [Styling](#styling) and [Layouts](#layouts) secti
 
 ### Redux
 
-`instant-react` has been configured to utilise [Redux](https://github.com/reduxjs/redux), [Redux Thunk](https://github.com/reduxjs/redux-thunk) and [Redux Localstorage](https://www.npmjs.com/package/redux-localstorage). We've opted to use the [Ducks Modular Redux](https://github.com/erikras/ducks-modular-redux) pattern for Redux modules.
+`instant-react` has been configured to utilise [Redux](https://github.com/reduxjs/redux), [Redux Thunk](https://github.com/reduxjs/redux-thunk) and [Redux Localstorage](https://www.npmjs.com/package/redux-localstorage). We've opted to use the [Ducks Modular Redux](https://github.com/erikras/ducks-modular-redux) pattern for the core Redux modules, but you don't have to.
 
 Redux is useful for large applications and can be integrated into your application with very little effort. Please see the [Using Redux](#using-redux) section for information on how to use Redux in your application.
 
 ## Firebase
 
-@todo
+`instant-react` has been designed to integrate seemlessly with [Firebase](https://firebase.google.com/). This means it's incredibly easy to utilise Firebase services such as [Firebase Authentication](https://firebase.google.com/docs/auth/), [Cloud Firestore](https://firebase.google.com/docs/firestore/), [Cloud Storage](https://firebase.google.com/docs/storage/) and [Firebase Hosting](https://firebase.google.com/docs/hosting/).
+
+### Authentication
+
+To enable authentication, please ensure the `app.useAuth` setting in `config` is set to `true`.
+
+Next, head to the Firebase console and ensure one of the Sign-in providers has been enabled in the "Sign-in method" section of "Authentication".
+
+**Please note:** `instant-react` currently only supports the `Email/Password` provider. As a consequence, you'll need to manually add users to the "Users" section of "Authentication".
+
+Restart the React server (remember, `config` settings don't take effect without restarting the server) and navigate to [http://localhost:3000/signin](http://localhost:3000/signin).
 
 ## Helmet
 

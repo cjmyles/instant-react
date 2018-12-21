@@ -5,7 +5,6 @@ import LoadingPanel from 'instant-react-core/components/LoadingPanel';
 
 import { auth } from 'instant-react-core/utils/firebase';
 import * as authActions from 'redux/modules/auth';
-import * as clientActions from 'redux/modules/client';
 
 import Theme from './Theme';
 import Routes from './Routes';
@@ -24,17 +23,13 @@ class App extends Component {
   async componentDidMount() {
     if (CONFIG.app.useAuth) {
       auth.onAuthStateChanged(this.handleAuthStateChanged);
-    } else {
-      this.setState({ isAuthenticating: false });
     }
   }
 
   render() {
-    const { client } = this.props;
-    const theme = client ? client.theme : {};
-    const isAuthenticating = this.isAuthenticating;
+    const theme = {};
 
-    return isAuthenticating ? (
+    return this.isAuthenticating ? (
       <LoadingPanel />
     ) : (
       <Theme theme={theme}>
@@ -44,17 +39,14 @@ class App extends Component {
   }
 }
 
+// Note: although we don't reference `this.history` explicitly in this component, the `router` is required for app routing
 App.propTypes = {
   classes: PropTypes.object.isRequired,
   auth: PropTypes.object,
-  client: PropTypes.object,
   authActions: PropTypes.object,
   history: PropTypes.object.isRequired,
 };
 
-export default decorate(
-  styles,
-  ['auth', 'client'],
-  { authActions, clientActions },
-  { withRouter: true }
-)(App);
+export default decorate(styles, 'auth', { authActions }, { withRouter: true })(
+  App
+);

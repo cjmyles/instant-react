@@ -2,9 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { decorate } from 'instant-react-core/utils/component';
 import Layout from 'instant-react-core/layouts/Default';
+import { auth } from 'instant-react-core/utils/firebase';
 
-import SettingsIcon from '@material-ui/icons/Settings';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import HelpIcon from '@material-ui/icons/HelpOutline';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import PowerIcon from '@material-ui/icons/PowerSettingsNew';
 
 const styles = theme => ({
   appBar: {
@@ -17,9 +20,18 @@ const styles = theme => ({
   },
 });
 
-const links = [
-  { label: 'Settings', to: '/settings', icon: SettingsIcon },
+const unauthenticatedLinks = [{ label: 'About', to: '/about', icon: HelpIcon }];
+const authenticatedLinks = [
+  { label: 'Dashboard', to: '/', icon: DashboardIcon },
   { label: 'About', to: '/about', icon: HelpIcon },
+  { label: 'Profile', to: '/profile', icon: AccountBoxIcon },
+  {
+    label: 'Sign Out',
+    icon: PowerIcon,
+    action: () => {
+      auth.signOut();
+    },
+  },
 ];
 
 function DefaultLayout(props) {
@@ -27,14 +39,14 @@ function DefaultLayout(props) {
 
   return (
     <Layout
-      variant="default"
+      variant="dashboard"
       /*appBarLogo={{
         height: 50,
         url: '',
       }}*/
       appBarTitle={CONFIG.app.title}
-      sidebarLinks={links}
-      mobileLinks={links}
+      unauthenticatedLinks={unauthenticatedLinks}
+      authenticatedLinks={authenticatedLinks}
       classes={{
         appBar: classes.appBar,
         sidebar: classes.sidebar,
@@ -48,7 +60,6 @@ function DefaultLayout(props) {
 
 DefaultLayout.propTypes = {
   classes: PropTypes.object.isRequired,
-  auth: PropTypes.object,
 };
 
-export default decorate(styles, 'auth')(DefaultLayout);
+export default decorate(styles)(DefaultLayout);

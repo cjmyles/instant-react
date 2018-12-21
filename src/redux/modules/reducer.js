@@ -6,7 +6,7 @@ import auth from './auth';
 import { loading, success } from 'instant-react-core/redux/reducers';
 
 // Custom
-import client from './client';
+// ...
 
 export default combineReducers({
   // Core
@@ -16,5 +16,5 @@ export default combineReducers({
   // form,
 
   // Custom
-  client,
+  // ...
 });
